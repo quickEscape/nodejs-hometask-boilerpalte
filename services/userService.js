@@ -1,16 +1,49 @@
-const { UserRepository } = require('../repositories/userRepository');
+const { UserRepository } = require("../repositories/userRepository");
 
 class UserService {
+  // TODO: Implement methods to work with user
+  getUsers() {
+    const users = UserRepository.getAll();
 
-    // TODO: Implement methods to work with user
+    if (users.length) return users;
 
-    search(search) {
-        const item = UserRepository.getOne(search);
-        if(!item) {
-            return null;
-        }
-        return item;
-    }
+    return null;
+  }
+
+  getUser(id) {
+    const user = UserRepository.getOne(id);
+
+    if (user) return user;
+
+    return null;
+  }
+
+  createUser(data) {
+    const user = UserRepository.create(data);
+
+    if (user) return user;
+
+    return null;
+  }
+
+  updateUser(id, data) {
+    const user = UserRepository.update(id, data);
+
+    if (user) return user;
+
+    return null;
+  }
+
+  deleteUser(id) {
+    const user = UserRepository.delete(id);
+
+    if (user) return user;
+
+    return null;
+  }
 }
 
-module.exports = new UserService();
+const clearUser = ({ id, password, ...other }) => other;
+
+exports.UserService = new UserService();
+exports.clearUser = clearUser;
